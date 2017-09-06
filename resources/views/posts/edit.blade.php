@@ -92,7 +92,13 @@
     <script src="/js/validator.min.js"></script>
     <script src="/js/select2.min.js"></script>
     <script>
-        CKEDITOR.replace('body');
+        var options = {
+            filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+            filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token={{csrf_token()}}',
+            filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+            filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token={{csrf_token()}}'
+        };
+        CKEDITOR.replace('body' , options);
         $('#create_post_form').validator();
         $("#tag").select2();
         $("#tag").val({{ json_encode($post->tags()->allRelatedIds()->toArray()) }}).trigger("change");
